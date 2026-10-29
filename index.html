@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>コノミ KONOMI</title>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/background.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/machine.css">
+<link rel="stylesheet" href="css/scan.css">
+</head>
+<body>
+
+<!-- 瓶の形・金属キャップ・光の線で共通して使うSVG定義 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<clipPath id="cp"><path d="M40 40h40v22c0 14 26 22 26 52v158a22 22 0 0 1-22 22H36a22 22 0 0 1-22-22V114c0-30 26-38 26-52z"/></clipPath>
+<linearGradient id="mt" x1="0" x2="1"><stop offset="0" stop-color="#7d838c"/><stop offset=".35" stop-color="#e3e6ea"/><stop offset=".7" stop-color="#9aa0a8"/><stop offset="1" stop-color="#5f656d"/></linearGradient>
+<linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#f6c98a" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#f6c98a" stop-opacity=".2"/></linearGradient>
+</defs></svg>
+
+<!-- 背景(色のかたまり・光の曲線・ドット・球) -->
+<div class="bg" aria-hidden="true">
+<i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="blob b4"></i>
+<svg class="curves" viewBox="0 0 1000 700" preserveAspectRatio="none"><path d="M-20 100C180 40 360 130 560 60S840 -10 1020 30"/><path d="M-20 560C220 480 330 640 560 640S860 560 1020 500"/></svg>
+<i class="dots d1"></i><i class="dots d2"></i>
+<i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="orb o4"></i><i class="orb o5"></i>
+</div>
+
+<main>
+  <!-- ロゴと見本の瓶(js/hero.js が中身を作る) -->
+  <section class="hero" id="hero"></section>
+
+  <!-- 自販機本体(js/machine.js が中身を作る) -->
+  <section class="card">
+    <div class="show" aria-live="polite">
+      <div class="status" id="status">スキャンするか、右で選んでください</div>
+      <div id="main"></div>
+      <div class="res" id="res"></div>
+    </div>
+    <div class="panel">
+      <div id="groups" class="groups"></div>
+      <div class="btns">
+        <button class="scan" id="scan">からだをスキャン</button>
+        <button class="make" id="make">調合して出す</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">2126年の自販機を想像したプロトタイプです。天気は Open-Meteo から実際に取得していますが、体調の解析は演出で、味はすべて架空のものです。</p>
+</main>
+
+
+<!-- スキャン画面(js/scan.js が動かす) -->
+<div class="scan-overlay" id="scan-overlay" role="dialog" aria-modal="true" aria-labelledby="scan-title" hidden>
+  <div class="scan-box">
+    <h2 id="scan-title">スキャン中</h2>
+    <div class="scan-frame" id="scan-frame">
+      <video id="scan-video" playsinline muted></video>
+      <svg class="sil" viewBox="0 0 100 130" aria-hidden="true"><circle cx="50" cy="48" r="20"/><path d="M12 128c0-26 17-40 38-40s38 14 38 40z"/></svg>
+      <div class="hud" aria-hidden="true">
+        <i class="grid"></i><i class="oval"></i>
+        <i class="cr tl"></i><i class="cr tr"></i><i class="cr bl"></i><i class="cr br"></i>
+        <i class="beam"></i>
+        <div class="ro">
+          <span>心拍 <b id="ro-hr">--</b> bpm</span>
+          <span>体温 <b id="ro-temp">--</b> ℃</span>
+          <span>表情 <b id="ro-mood">--</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="scan-bar"><i id="scan-bar"></i></div>
+    <ol class="scan-steps" id="scan-steps"></ol>
+    <p class="scan-note" id="scan-note"></p>
+    <button class="ghost" id="scan-cancel" type="button">やめる</button>
+  </div>
+</div>
+
+<!-- 読み込み順が大事です(上のファイルの関数を下のファイルが使います) -->
+<script src="js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/bottle.js"></script>
+<script src="js/hero.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/camera.js"></script>
+<script src="js/scan.js"></script>
+<script src="js/machine.js"></script>
+</body>
+</html>
