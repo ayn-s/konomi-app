@@ -2,7 +2,7 @@
 // https://open-meteo.com/en/docs
 const WEATHER = {
   fallbackPlace: { lat: 35.6812, lon: 139.7671, name: "東京" }, // 位置情報が使えないときの場所
-  coldBelow: 12,   // 体感がこの℃未満なら「さむい」
+  coldBelow: 18,   // 体感がこの℃未満なら「さむい」
   hotFrom: 26,     // 体感がこの℃以上なら「あつい」
   timeoutMs: 6000,
   geoWaitMs: 12000 // 位置情報の返事を待つ上限(許可の確認を待っている時間も含む)
