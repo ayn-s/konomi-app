@@ -1,0 +1,21 @@
+{
+  "name": "konomi",
+  "private": true,
+  "version": "2.0.0",
+  "description": "コノミ KONOMI — 2126年の自販機のプロトタイプ(React + API + PostgreSQL)",
+  "workspaces": [
+    "web",
+    "api"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w web",
+    "dev:api": "npm run dev -w api",
+    "build": "npm run build -w web",
+    "start": "npm run start -w api",
+    "db:init": "npm run db:init -w api"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  }
+}

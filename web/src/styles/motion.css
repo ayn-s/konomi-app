@@ -1,0 +1,111 @@
+/* 動き:背景の色のかたまり・泡、見本の瓶の液面・泡・具、調合の演出 */
+
+/* --- 背景:色のかたまりが液体のようにゆっくり形を変える --- */
+.blob{will-change:border-radius,transform}
+.b1{animation:morph1 22s ease-in-out infinite alternate}
+.b2{animation:morph2 26s ease-in-out infinite alternate}
+.b3{animation:morph3 24s ease-in-out infinite alternate}
+.b4{animation:sway4 30s ease-in-out infinite alternate}
+@keyframes morph1{
+  0%{border-radius:50% 60% 55% 45%/60% 50% 50% 40%;transform:translate(0,0) rotate(0)}
+  50%{border-radius:62% 38% 46% 54%/45% 62% 38% 55%;transform:translate(24px,16px) rotate(6deg)}
+  100%{border-radius:42% 58% 63% 37%/56% 40% 60% 44%;transform:translate(-10px,28px) rotate(-4deg)}}
+@keyframes morph2{
+  0%{border-radius:55% 45% 50% 50%/50% 55% 45% 50%;transform:translate(0,0) rotate(0)}
+  50%{border-radius:40% 60% 62% 38%/60% 42% 58% 40%;transform:translate(-26px,20px) rotate(-7deg)}
+  100%{border-radius:60% 40% 38% 62%/42% 60% 40% 58%;transform:translate(-8px,-14px) rotate(5deg)}}
+@keyframes morph3{
+  0%{border-radius:45% 55% 50% 50%/50% 45% 55% 50%;transform:translate(0,0) rotate(0)}
+  50%{border-radius:58% 42% 40% 60%/40% 58% 42% 60%;transform:translate(20px,-22px) rotate(5deg)}
+  100%{border-radius:38% 62% 56% 44%/62% 38% 60% 40%;transform:translate(30px,6px) rotate(-6deg)}}
+@keyframes sway4{to{transform:translateX(-40px) scaleY(1.06)}}
+
+/* 球はふわふわ浮かぶ */
+.orb{animation:float 9s ease-in-out infinite alternate}
+.o2{animation-duration:7s;animation-delay:-2s}
+.o3{animation-duration:11s;animation-delay:-5s}
+.o4{animation-duration:6s;animation-delay:-1s}
+.o5{animation-duration:8s;animation-delay:-4s}
+@keyframes float{to{transform:translateY(-18px)}}
+
+/* 炭酸の泡(js/ambient.js が作る) */
+.fizz{position:absolute;inset:0}
+.fizz i{bottom:-40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);
+  background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.55),rgba(255,255,255,.06) 45%,transparent 70%);
+  animation:fizz linear infinite;opacity:.8}
+@keyframes fizz{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(var(--sway),-55vh)}
+  100%{transform:translate(0,calc(-100vh - 80px))}}
+
+/* --- 見本の瓶:瓶そのものがゆっくり浮かぶ --- */
+.hero>.bt{animation:bob 5s ease-in-out infinite alternate}
+.hero>.bt:nth-of-type(2){animation-delay:-1.3s}
+.hero>.bt:nth-of-type(3){animation-delay:-2.6s}
+.hero>.bt:nth-of-type(4){animation-delay:-3.9s}
+@keyframes bob{to{transform:translateY(-8px)}}
+
+/* 瓶の中:液面の波(1周期ぶん横に流してループ) */
+.wave{animation:wave 3.2s linear infinite}
+.wave.slow{animation-duration:5s;animation-direction:reverse}
+@keyframes wave{to{transform:translateX(40px)}}
+
+/* 瓶の中:下から上がる泡 */
+.bub{animation:bub linear infinite;opacity:0}
+@keyframes bub{
+  0%{transform:translateY(0);opacity:0}
+  15%{opacity:.85}
+  85%{opacity:.85}
+  100%{transform:translateY(calc(var(--rise) * -1));opacity:0}}
+
+/* 瓶の中:具がゆらゆら漂う */
+.drift>*{transform-box:fill-box;transform-origin:center;animation:drift 4s ease-in-out infinite alternate}
+.drift>*:nth-child(2n){animation-duration:5s;animation-delay:-1.5s}
+.drift>*:nth-child(3n){animation-duration:6s;animation-delay:-3s}
+@keyframes drift{
+  0%{transform:translate(0,0) rotate(0)}
+  100%{transform:translate(3px,-7px) rotate(8deg)}}
+
+/* --- 調合の演出(js/machine.js) --- */
+/* 管:ガラス(外側)と、中の空洞 */
+.tube-glass{fill:none;stroke:rgba(255,255,255,.35);stroke-width:10;stroke-linecap:round}
+.tube-in{fill:none;stroke:rgba(15,20,41,.75);stroke-width:7;stroke-linecap:round}
+/* 管の中を流れる液体:上から満たされ(fill)、最後は上から抜けていく(drain) */
+.flow{fill:none;stroke-linecap:butt;stroke-dasharray:100 100;stroke-dashoffset:100;
+  transition:stroke-dashoffset .8s ease-in}
+.flow.fill{stroke-dashoffset:0}
+.flow.drain{stroke-dashoffset:-100;transition-duration:.6s}
+
+/* 注ぎ口から瓶へ落ちる筋 */
+.pour{transform-box:fill-box;transform-origin:top;transform:scaleY(0);opacity:.9}
+.pour.on{transform:scaleY(1);transition:transform .35s ease-in}
+.pour.on.off{transform-origin:bottom;transform:scaleY(0);transition:transform .4s ease-in}
+
+/* キャップ:外れて上へ → ぽんと閉まる */
+#main .cap{transition:transform .45s cubic-bezier(.3,1.7,.5,1),opacity .25s}
+#main .cap.open{transform:translateY(-36px);opacity:0;transition:transform .35s ease-in,opacity .3s}
+
+/* できあがり:瓶がふわっと光る */
+#main .bt.glow{animation:glow 1.4s ease-out}
+@keyframes glow{
+  0%{filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
+  30%{filter:drop-shadow(0 0 26px rgba(255,240,200,.95)) brightness(1.15)}
+  100%{filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}}
+
+/* きらめき */
+.spark{position:absolute;left:50%;top:62%;width:10px;height:10px;margin:-5px 0 0 -5px;pointer-events:none;
+  background:var(--gold);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);
+  animation:spark 1.1s ease-out both}
+.spark:nth-child(2n){background:#fff}
+.spark:nth-child(3n){background:var(--cyan)}
+@keyframes spark{
+  0%{transform:translate(0,0) scale(.2);opacity:0}
+  20%{opacity:1}
+  100%{transform:translate(var(--x),var(--y)) scale(1.1) rotate(90deg);opacity:0}}
+
+/* 動きを減らす設定の人には止める */
+@media(prefers-reduced-motion:reduce){
+  .blob,.orb,.fizz,.hero>.bt,.wave,.bub,.drift>*{animation:none!important}
+  .fizz,.bub{display:none}
+  .flow,.pour,#main .cap{transition:none!important}
+}

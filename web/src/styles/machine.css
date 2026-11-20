@@ -1,0 +1,54 @@
+/* 自販機本体:左=調合する瓶と結果、右=選択肢とボタン */
+.card{margin-top:34px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:20px;padding:22px;border-radius:30px;background:rgba(18,24,52,.62);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+
+/* 左側 */
+.show{display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:10px;min-height:380px}
+#main{position:relative;width:100%;display:flex;flex-direction:column;align-items:center}
+.show .bt{width:min(150px,50%);display:block;overflow:visible;transition:transform .45s ease}
+.disp{width:min(150px,50%);display:block;overflow:visible}
+.status{font-size:13px;color:var(--cyan);text-align:center;min-height:2.6em;line-height:1.6}
+.liq{transform-box:fill-box;transform-origin:bottom;transform:scaleY(0)}
+.liq.on{transform:scaleY(1);transition:transform 2.4s cubic-bezier(.3,.7,.3,1)}
+.res{text-align:center;width:100%}
+.res h2{margin:4px 0 6px;font-size:18px;color:var(--gold);line-height:1.5}
+.res p{margin:4px 0;font-size:13px;line-height:1.7;opacity:.92}
+.mix{display:flex;height:10px;border-radius:6px;overflow:hidden;margin:10px 0 6px}
+.mix span{display:block}
+.lg{font-size:12px;opacity:.8}
+
+/* 右側:選択パネル */
+.panel{display:flex;flex-direction:column;gap:16px}
+.groups{display:flex;flex-direction:column;gap:16px}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;padding:0;margin-bottom:8px}
+legend .ic{width:30px;height:30px}
+legend .ic svg{width:18px;height:18px}
+/* 選ばなければおまかせのグループ:1つ目の上に区切り線 */
+.opt-note{font-size:11px;font-weight:400;opacity:.65}
+fieldset:not(.opt)+fieldset.opt{padding-top:14px;border-top:1px dashed rgba(255,255,255,.22)}
+/* 飲み物の量でボトルの大きさを変える(底を基準に小さくする) */
+.bt[style*="--size"]{transform:scale(var(--size));transform-origin:50% 100%}
+/* 液面に浮かぶ氷 */
+.ice{fill:rgba(235,250,255,.38);stroke:rgba(255,255,255,.75);stroke-width:1.2}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0}
+.chips span{display:inline-block;padding:8px 15px;border-radius:999px;border:1.5px solid rgba(255,255,255,.4);font-size:14px;transition:background .15s,color .15s}
+.chips input:checked+span{background:linear-gradient(120deg,var(--pink),#f8a15e);color:var(--navy2);border-color:transparent;font-weight:700}
+.chips input:focus-visible+span{outline:3px solid var(--cyan);outline-offset:2px}
+
+/* ボタン */
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:14px 20px;cursor:pointer;flex:1;min-width:140px;color:var(--navy2)}
+button:focus-visible{outline:3px solid #fff;outline-offset:2px}
+button:disabled{opacity:.5;cursor:wait}
+.scan{background:var(--cyan)}
+.make{background:linear-gradient(120deg,var(--pink),#f8a15e)}
+
+/* 選択肢が多いので、パソコンでは左の瓶を画面に残したままにする */
+@media(min-width:721px){.show{position:sticky;top:16px;align-self:start}}
+@media(max-width:720px){
+  .card{grid-template-columns:1fr;padding:16px}
+  .show{min-height:0}
+}
+@media(prefers-reduced-motion:reduce){.liq.on{transition:none}}

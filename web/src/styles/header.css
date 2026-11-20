@@ -1,0 +1,26 @@
+/* ページ上部のヘッダー:天気・気温・時刻 */
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px;padding:8px 16px;border-radius:999px;background:rgba(18,24,52,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-size:14px}
+.tb-wx{display:flex;align-items:center;gap:8px;min-width:0}
+.tb-ic{display:inline-grid;width:24px;height:24px}
+.tb-ic svg{width:24px;height:24px}
+.tb-wx b{font-size:18px;color:var(--gold)}
+.tb-clock{margin-left:auto;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tb-clock span{opacity:.75;font-size:13px}
+.tb-clock b{font-size:18px;color:var(--cyan);letter-spacing:.04em}
+
+/* 「スマホで開く」ボタンとQRコードの画面(js/share.js) */
+.topbar{flex-wrap:wrap}
+.tb-share{flex:none;min-width:0;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;font-size:13px;color:var(--text);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3)}
+.tb-share svg{width:18px;height:18px}
+.share{box-sizing:border-box;width:min(92vw,380px);max-width:none;padding:22px;border:1px solid rgba(255,255,255,.2);border-radius:24px;background:#1a2040;color:var(--text);text-align:center}
+.share::backdrop{background:rgba(5,8,20,.7);backdrop-filter:blur(4px)}
+.share h2{margin:0;font-size:18px;color:var(--gold)}
+.share-lead{margin:6px 0 14px;font-size:13px;opacity:.8}
+.share-qr{width:min(240px,70vw);margin:0 auto;padding:10px;background:#fff;border-radius:16px}
+.share-qr svg{display:block;width:100%;height:auto}
+.share-warn{margin:12px 0 0;padding:8px 10px;border-radius:10px;background:rgba(245,143,184,.15);color:#ffc2d9;font-size:12px;line-height:1.6;text-align:left}
+.share-url{display:flex;gap:8px;margin-top:14px}
+.share-url input{flex:1;min-width:0;font:inherit;font-size:12px;color:var(--text);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:8px 12px}
+.share-url button{padding:8px 14px;font-size:13px}
+.share-close{margin-top:14px;padding:9px 26px}
+@media(max-width:520px){.tb-share span,.tb-clock span{display:none}.tb-share{padding:6px 8px}.topbar{padding:8px 10px 8px 14px;gap:8px}}
