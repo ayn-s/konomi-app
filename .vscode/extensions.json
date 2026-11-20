@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 { "recommendations": ["editorconfig.editorconfig", "dbaeumer.vscode-eslint"] }
+=======
+{ "recommendations": ["ritwickdey.LiveServer", "editorconfig.editorconfig"] }
+>>>>>>> origin/aihara

@@ -2,6 +2,7 @@
 Thumbs.db
 node_modules/
 *.log
+<<<<<<< HEAD
 # ビルドしてできるもの
 web/dist/
 # 接続先やパスワードを書くファイル(共有しない。.env.example を共有する)
@@ -9,3 +10,5 @@ web/dist/
 .env.local
 web/.env
 api/.env
+=======
+>>>>>>> origin/aihara

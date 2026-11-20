@@ -1,0 +1,12 @@
+/* 全体の色・文字・ページ幅・共通パーツ */
+:root{--navy:#1a2040;--navy2:#0f1429;--cyan:#7fd6e6;--pink:#f58fb8;--gold:#f6c98a;--text:#f4f5fb;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100%;background:radial-gradient(ellipse at 50% 20%,#2a3563 0%,var(--navy) 45%,var(--navy2) 100%) fixed;background-color:var(--navy2);color:var(--text);font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;overflow-x:hidden}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:28px 16px 48px}
+.foot{margin-top:18px;text-align:center;font-size:12px;opacity:.6}
+
+/* 共通:光るガラス瓶(SVG)と丸いアイコン */
+.bt{height:auto;filter:drop-shadow(0 0 10px rgba(255,255,255,.5))}
+.ic{width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+.ic svg{width:22px;height:22px}
